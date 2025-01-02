@@ -1,0 +1,7 @@
+sources:
+ - name: sample_files
+   tables:
+    - name: salesforce_leads
+    - name: source1
+    - name: source2
+    - name: source3
