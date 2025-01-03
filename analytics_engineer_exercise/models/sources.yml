@@ -1,5 +1,5 @@
 sources:
- - name: sample_files
+ - name: raw_table
    tables:
     - name: salesforce_leads
     - name: source1
