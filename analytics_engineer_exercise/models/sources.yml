@@ -1,0 +1,7 @@
+sources:
+ - name: raw_table
+   tables:
+    - name: salesforce_leads
+    - name: source1
+    - name: source2
+    - name: source3
