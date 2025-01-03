@@ -1,43 +1,4 @@
-WITH salesforce AS (
-    SELECT
-        null::varchar as accepts_financial_aid,
-        null::varchar as ages_served,
-        capacity_c::int as capacity,
-        null::date as certificate_expiration_date,
-        initcap(city)::varchar as city,
-        split_part(initcap(street),',',1)::varchar as address1,
-        null::varchar as address2,
-        initcap(company)::varchar as company,
-        REGEXP_REPLACE(phone::varchar, '[^0-9]+', '', 'g')::varchar as phone,
-        REGEXP_REPLACE(mobile_phone::varchar, '[^0-9]+', '', 'g')::varchar as phone2,
-        null::varchar as county,
-        null::varchar as curriculum_type,
-        lower(email)::varchar as email,
-        initcap(first_name)::varchar as first_name,
-        null::varchar as language,
-        initcap(last_name)::varchar as last_name,
-        null::varchar as license_status,
-        null::date as license_issued,
-        null::int as license_number,
-        null::date as license_renewed,
-        null::varchar as license_type,
-        initcap(company)::varchar as licensee_name,
-        null::int as max_age,
-        null::int as min_age,
-        null::varchar as operator,
-        brightwheel_school_uuid_c::varchar as provider_id,
-        null::varchar as schedule,
-        (CASE
-        WHEN LENGTH(TRIM(state)) = 2 THEN UPPER(state)
-        ELSE INITCAP(state)
-        END)::varchar AS state, /* could use more cleaning/standardizing */
-        initcap(title)::varchar as title,
-        lower(website)::varchar as website_address,
-        postal_code::varchar as zip,
-        null::varchar as facility_type
-    FROM {{ ref('leads_raw') }}
-),
-source1_data AS (
+WITH source1_data AS (
     SELECT
         null::varchar as accepts_financial_aid,
         null::varchar as ages_served,
@@ -237,8 +198,6 @@ source3_data AS (
     FROM {{ ref('source3_raw') }}
 )
 -- Combining all source data
-SELECT * FROM salesforce
-UNION ALL
 SELECT * FROM source1_data
 UNION ALL
 SELECT * FROM source2_data
